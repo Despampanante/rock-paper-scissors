@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <button onclick="game()">CLICK ME PLS!</button>
+
+        <script>
+            let computerPlay = () => {
+                
+            }
+
+            let playerSelection = () => {
+                playerChoice = cleanUserInput(prompt("Yo, gimmie Rock, Paper, or Scissors: ", "rock"));
+                return playerChoice;
+            }
+
+            let playRound = (playerSelection, computerSelection, currentScore) => {
+
+            }
+
+            let cleanUserInput = (userInput) => {
+                userInput = userInput.toLowerCase();
+                userInput = userInput.trim();
+                return userInput;
+            }
+
+            let game = () => {
+                
+                let score;
+                for (let i = 0; i < 5; i++) {
+                    const player = playerSelection();
+                    const computer = computerPlay();
+                    let score = playRound(player, computer, score);
+                    console.log("Player: " + score[0] + "Computer: " + score[1]);
+                }
+                
+
+            }
+
+        </script>
+
+
+    </body>
+</html>
