@@ -6,7 +6,9 @@
 
         <script>
             let computerPlay = () => {
-                
+                const options = ['rock', 'paper', 'scissors'];
+                const randomElement = options[Math.floor(Math.random() * options.length)];
+                return randomElement;
             }
 
             let playerSelection = () => {
@@ -14,24 +16,59 @@
                 return playerChoice;
             }
 
-            let playRound = (playerSelection, computerSelection, currentScore) => {
+            let playRound = (playerSelection, computerSelection, currentScore, roundCounter) => {
 
+                roundCounter += 1;
+                if (playerSelection === computerSelection) {
+                    return currentScore; 
+                }
+                if (playerSelection === 'rock') {
+                    if (computerSelection === 'paper') {
+                        currentScore[1] += 1;
+                    } else {
+                        currentScore[0] += 1;
+                    }
+                    return currentScore; 
+                }
+                if (playerSelection === 'scissors') {
+                    if (computerSelection === 'rock') {
+                        currentScore[1] += 1;
+                    } else {
+                        currentScore[0] += 1;
+                    }
+                    return currentScore; 
+                }
+                if (playerSelection === 'paper') {
+                    if (computerSelection === 'scissors') {
+                        currentScore[1] += 1;
+                    } else {
+                        currentScore[0] += 1;
+                    }
+                    return currentScore, roundCounter; 
+                }
             }
 
+
+
             let cleanUserInput = (userInput) => {
-                userInput = userInput.toLowerCase();
-                userInput = userInput.trim();
-                return userInput;
+                cleaning = userInput.toLowerCase();
+                cleaning = userInput.trim();
+                return cleaning;
             }
 
             let game = () => {
-                
-                let score;
+                let player;
+                let computer;
+                let score = [0,0];
+                let roundCounter = 0;
                 for (let i = 0; i < 5; i++) {
-                    const player = playerSelection();
-                    const computer = computerPlay();
-                    let score = playRound(player, computer, score);
-                    console.log("Player: " + score[0] + "Computer: " + score[1]);
+                    roundCounter += 1;
+                    player = playerSelection();
+                    computer = computerPlay();
+                    score = playRound(player, computer, score);
+                    console.log('Player: ' + player + ' Computer: ' + computer)
+                    console.log("Player: " + score[0] + " Computer: " + score[1] + " Round: " + roundCounter);
+                    
                 }
                 
 
