@@ -2,77 +2,78 @@
 
 <html>
     <body>
-        <button onclick="game()">CLICK ME PLS!</button>
+        <button id="rock">rock</button>
+        <button id="paper">paper</button>
+        <button id="scissors">scissors</button>
+        <p>Player Score:</p>
+        <p id="playerScore">0</p>
+        <p>Computer Score:</p>
+        <p id="computerScore">0</p>
+        <p id='roundResult'></p>
 
         <script>
-            let computerPlay = () => {
+
+            function playRound (e) {
+                const roundResult = document.getElementById('roundResult');
+                const playerSelection = this.id;
                 const options = ['rock', 'paper', 'scissors'];
-                const randomElement = options[Math.floor(Math.random() * options.length)];
-                return randomElement;
-            }
-
-            let playerSelection = () => {
-                playerChoice = cleanUserInput(prompt("Yo, gimmie Rock, Paper, or Scissors: ", "rock"));
-                return playerChoice;
-            }
-
-            let playRound = (playerSelection, computerSelection, currentScore, roundCounter) => {
-
-                roundCounter += 1;
+                const computerSelection = options[Math.floor(Math.random() * options.length)];
+                console.log(playerSelection);
+                console.log(currentScore);
                 if (playerSelection === computerSelection) {
-                    return currentScore; 
+                    roundResult.textContent = 'TIE';
+
                 }
-                if (playerSelection === 'rock') {
+                else if (playerSelection === 'rock') {
                     if (computerSelection === 'paper') {
                         currentScore[1] += 1;
+                        roundResult.textContent = 'Computer Won';
                     } else {
                         currentScore[0] += 1;
+                        roundResult.textContent = 'Player Won';
                     }
-                    return currentScore; 
                 }
-                if (playerSelection === 'scissors') {
+                else if (playerSelection === 'scissors') {
                     if (computerSelection === 'rock') {
                         currentScore[1] += 1;
+                        roundResult.textContent = 'Computer Won';
                     } else {
                         currentScore[0] += 1;
+                        roundResult.textContent = 'Player Won';
                     }
-                    return currentScore; 
                 }
-                if (playerSelection === 'paper') {
+                else if (playerSelection === 'paper') {
                     if (computerSelection === 'scissors') {
                         currentScore[1] += 1;
+                        roundResult.textContent = 'Computer Won';
                     } else {
                         currentScore[0] += 1;
+                        roundResult.textContent = 'Player Won';
                     }
-                    return currentScore, roundCounter; 
                 }
-            }
 
+                const uiPScore = document.getElementById('playerScore');
+                uiPScore.textContent = currentScore[0];
+                const uiCScore = document.getElementById("computerScore");
+                uiCScore.textContent = currentScore[1];
 
+                if (currentScore[0] == 5 || currentScore[1] == 5) {currentScore = [0,0]}
 
-            let cleanUserInput = (userInput) => {
-                cleaning = userInput.toLowerCase();
-                cleaning = userInput.trim();
-                return cleaning;
-            }
-
-            let game = () => {
-                let player;
-                let computer;
-                let score = [0,0];
-                let roundCounter = 0;
-                for (let i = 0; i < 5; i++) {
-                    roundCounter += 1;
-                    player = playerSelection();
-                    computer = computerPlay();
-                    score = playRound(player, computer, score);
-                    console.log('Player: ' + player + ' Computer: ' + computer)
-                    console.log("Player: " + score[0] + " Computer: " + score[1] + " Round: " + roundCounter);
-                    
-                }
                 
-
             }
+
+            const buttons = document.querySelectorAll('button');
+            console.log(buttons);
+            let player;
+            let currentScore = [0,0];
+            buttons.forEach( button => {
+                console.log(button);
+                button.addEventListener('click', playRound)
+            });
+            
+            
+            // console.log('Player: ' + player + ' Computer: ' + computer)
+            // console.log("Player: " + score[0] + " Computer: " + score[1] + " Round: " + roundCounter); 
 
         </script>
 
